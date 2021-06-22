@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Casbin.Persist;
 using Casbin.Rbac;
-#if !NET45
+#if !NET452
 using Microsoft.Extensions.Logging;
 #endif
 namespace Casbin
@@ -13,7 +13,6 @@ namespace Casbin
     /// </summary>
     public interface IEnforcer
     {
-
         #region Options
         public bool Enabled { get; set; }
         public bool EnabledCache { get; set; }
@@ -32,7 +31,7 @@ namespace Casbin
         public IRoleManager RoleManager { get; set; }
         public IEnforceCache EnforceCache { get; set; }
         public IExpressionHandler ExpressionHandler { get; set; }
-#if !NET45
+#if !NET452
         public ILogger Logger { get; set; }
 #endif
         #endregion
@@ -65,8 +64,7 @@ namespace Casbin
         /// <param name="requestValues">The request needs to be mediated, usually an array of strings, 
         /// can be class instances if ABAC is used.</param>
         /// <returns>Whether to allow the request and explains.</returns>
-#if !NET45
-
+#if !NET452
         public (bool Result, IEnumerable<IEnumerable<string>> Explains)
             EnforceEx(params object[] requestValues);
 #else
@@ -80,7 +78,7 @@ namespace Casbin
         /// <param name="requestValues">The request needs to be mediated, usually an array of strings, 
         /// can be class instances if ABAC is used.</param>
         /// <returns>Whether to allow the request and explains.</returns>
-#if !NET45
+#if !NET452
         public Task<(bool Result, IEnumerable<IEnumerable<string>> Explains)>
             EnforceExAsync(params object[] requestValues);
 #else

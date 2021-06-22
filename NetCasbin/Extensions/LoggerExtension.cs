@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-#if !NET45
+#if !NET452
 using Microsoft.Extensions.Logging;
 
 namespace Casbin.Extensions

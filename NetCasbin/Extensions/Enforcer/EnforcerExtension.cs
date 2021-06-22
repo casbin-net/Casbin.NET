@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Casbin.Evaluation;
 using Casbin.Model;
 using Casbin.Persist;
 using Casbin.Rbac;
-#if !NET45
+#if !NET452
 using Microsoft.Extensions.Logging;
 #endif
 
@@ -115,7 +114,7 @@ namespace Casbin.Extensions
             if (enforcer.AutoCleanEnforceCache)
             {
                 enforcer.EnforceCache?.Clear();
-#if !NET45
+#if !NET452
                 enforcer.Logger?.LogInformation("Enforcer Cache, Cleared all enforce cache.");
 #endif
             }
@@ -327,11 +326,11 @@ namespace Casbin.Extensions
             if (enforcer.AutoCleanEnforceCache)
             {
                 enforcer.EnforceCache?.Clear();
-#if !NET45
+#if !NET452
                 enforcer.Logger?.LogInformation("Enforcer Cache, Cleared all enforce cache.");
 #endif
             }
-#if !NET45
+#if !NET452
             enforcer.Logger?.LogInformation("Policy Management, Cleared all policy.");
 #endif
         }

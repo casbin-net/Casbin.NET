@@ -10,7 +10,7 @@ using Casbin.Model;
 using Casbin.Persist;
 using Casbin.Rbac;
 using Casbin.Util;
-#if !NET45
+#if !NET452
 using Microsoft.Extensions.Logging;
 #endif
 using DynamicExpresso;
@@ -73,7 +73,7 @@ namespace Casbin
         public IRoleManager RoleManager { get; set; } = new DefaultRoleManager(10);
         public IEnforceCache EnforceCache { get; set; }
         public IExpressionHandler ExpressionHandler { get; set; }
-#if !NET45
+#if !NET452
         public ILogger Logger { get; set; }
 #endif
         #endregion
@@ -111,7 +111,7 @@ namespace Casbin
             EnforceCache ??= new ReaderWriterEnforceCache(new ReaderWriterEnforceCacheOptions());
             if (EnforceCache.TryGetResult(requestValues, key, out bool cachedResult))
             {
-#if !NET45
+#if !NET452
                 Logger?.LogEnforceCachedResult(requestValues, cachedResult);
 #endif
                 return cachedResult;
@@ -153,7 +153,7 @@ namespace Casbin
             if (tryGetCachedResult.HasValue)
             {
                 bool cachedResult = tryGetCachedResult.Value;
-#if !NET45
+#if !NET452
                 Logger?.LogEnforceCachedResult(requestValues, cachedResult);
 #endif
                 return cachedResult;
@@ -172,7 +172,7 @@ namespace Casbin
         /// <param name="requestValues">The request needs to be mediated, usually an array of strings, 
         /// can be class instances if ABAC is used.</param>
         /// <returns>Whether to allow the request and explains.</returns>
-#if !NET45
+#if !NET452
         public (bool Result, IEnumerable<IEnumerable<string>> Explains)
             EnforceEx(params object[] requestValues)
         {
@@ -227,7 +227,7 @@ namespace Casbin
         /// <param name="requestValues">The request needs to be mediated, usually an array of strings, 
         /// can be class instances if ABAC is used.</param>
         /// <returns>Whether to allow the request and explains.</returns>
-#if !NET45
+#if !NET452
         public async Task<(bool Result, IEnumerable<IEnumerable<string>> Explains)>
             EnforceExAsync(params object[] requestValues)
         {
@@ -392,7 +392,7 @@ namespace Casbin
                     }
                 }
 
-#if !NET45
+#if !NET452
                 if (explain)
                 {
                     Logger?.LogEnforceResult(requestValues, finalResult, explains);
@@ -480,7 +480,7 @@ namespace Casbin
                 explains.Add(policyList[hitPolicyIndex]);
             }
 
-#if !NET45
+#if !NET452
             if (explain)
             {
                 Logger?.LogEnforceResult(requestValues, finalResult, explains);
